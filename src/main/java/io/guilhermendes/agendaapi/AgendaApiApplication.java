@@ -20,7 +20,6 @@ public class AgendaApiApplication {
 			contato.setEmail("Fulano@email.com");
 			contato.setFavorito(false);
 			repository.save(contato);
-
 		};
 	}
 
