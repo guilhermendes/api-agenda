@@ -14,6 +14,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("api/contatos")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class ContatoController {
     private final ContatoRepository repository;
 
@@ -35,10 +36,11 @@ public class ContatoController {
     }
 
     @PatchMapping("{id}/favorito")
-    public void favorite(@PathVariable Integer id, @RequestBody Boolean favorito){
+    public void favorite(@PathVariable Integer id){
         Optional<Contato> contato = repository.findById(id);
         contato.ifPresent(c ->{
-            c.setFavorito(favorito);
+            boolean favorito = c.getFavorito() == Boolean.TRUE;
+            c.setFavorito(!favorito);
             repository.save(c);
         });
     }
